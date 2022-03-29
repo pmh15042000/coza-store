@@ -13,6 +13,9 @@ class AppServiceProvider extends ServiceProvider
     }
     public function boot(Charts $charts)
     {
+        if (config('app.env') === 'production') {
+            \URL::forceScheme('https');
+        }
         Paginator::useBootstrap();
         $charts->register([
             \App\Charts\SalesChart::class
